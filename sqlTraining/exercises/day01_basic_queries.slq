@@ -1,0 +1,79 @@
+-- SQL Training
+-- Day 1
+-- Dataset: E-Commerce Brazil
+
+-- List tables
+SELECT name
+FROM sqlite_master
+WHERE type="table";
+
+-- Explore orders
+SELECT *
+FROM orders
+LIMIT 10;
+
+-- Explore customers
+SELECT *
+FROM customers
+LIMIT 15;
+
+-- Total orders
+SELECT COUNT(*) AS total_orders
+FROM orders;
+
+-- Result
+-- A total orders of 99441 were registered
+
+-- Order status distribution
+SELECT
+	order_status,
+	COUNT(*) AS total_orders
+FROM orders
+GROUP BY order_status
+ORDER BY total_orders DESC;
+
+-- Result
+-- A total of 96478 orders were delivered, 1107 shipped, 625 canceled,
+-- 609 unavailable, 314 invoiced, 301 were in processing, 5 created, and
+-- 2 orders were approved 	
+
+
+-- Dataset time range
+SELECT
+	MIN(order_purchase_timestamp) AS first_order,
+	MAX(order_purchase_timestamp) AS last_order
+FROM orders;
+
+-- Result
+-- The orders of the e-commerce dataset were evaluated from september 4 of 2016 to
+-- october 17 of 2018
+
+
+-- Unique customers
+SELECT COUNT(DISTINCT customer_id) AS unique_customer
+FROM customers; 
+
+-- Result
+-- In the customers db were found 99441 unque customers
+
+-- Average orders per customer
+SELECT 
+	COUNT(*) * 1.0 / COUNT(DISTINCT customer_id) AS avg_orders_per_customer
+FROM orders;
+
+-- Total revenue
+SELECT
+	SUM(payment_value) AS total_revenue
+FROM payments;
+
+-- Result
+-- Teh revenue total was 16.008.872,12
+
+-- Payment method distribution
+SELECT
+	payment_type,
+	COUNT(*) AS total_payments,
+	SUM(payment_value) AS revenue
+FROM payments
+GROUP BY payment_type
+ORDER BY revenue DESC;
