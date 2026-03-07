@@ -1,0 +1,21 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# virtual environments
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# large datasets
+datasets/raw/
+
+# temporary files
+*.log
+*.tmp
